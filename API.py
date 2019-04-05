@@ -11,6 +11,3 @@ def bookList():
     lines = file.read().split("\n")
     return jsonify(lines)
     # return jsonify([{"Title": "Supermarket", "Author": "Bobby Hall"}])
-
-if __name__ == '__main__':
-    app.run(debut=True)
