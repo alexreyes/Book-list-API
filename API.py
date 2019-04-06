@@ -56,10 +56,3 @@ def get_books():
                 file.write(link['alt'] + '\n')
     
     file.close()
-
-    # Delete the last \n
-    with open('bookList.txt') as f1:
-        lines = f1.readlines()
-
-    with open('bookList.txt', 'w') as f2:
-        f2.writelines(lines[:-1])
