@@ -50,9 +50,10 @@ def get_books():
     if response is not None: 
         
         for li in soup.find_all('li', attrs={'class': 'bookCoverContainer'}):
-            link = li.find('img', alt=True)
-
-            if link['alt'] is not "":
-                file.write(link['alt'] + '\n')
+            title = li.find('img', alt=True)
+            link = li.find('a', attrs={'class': 'bookCoverTarget'})
+            
+            if title['alt'] is not "":
+                file.write(title['alt'] + ' ,link: ' + "https://www.goodreads.com" + link['href'] + '\n')
     
     file.close()
