@@ -15,7 +15,11 @@ def bookList():
     get_books()
     file = open('bookList.txt', 'r')
     lines = file.read().split("\n")
-    return jsonify(lines)
+    
+    response = jsonify(lines)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
     # return jsonify([{"Title": "Supermarket", "Author": "Bobby Hall"}])
 
 def simple_get(url): 
