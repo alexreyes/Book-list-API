@@ -29,7 +29,7 @@ def log_error(e):
     print(e)
 
 def get_books():
-    url = 'https://www.goodreads.com/user_challenges/16171692'
+    url = 'https://www.goodreads.com/user_challenges/17224181'
     response = simple_get(url)
 
     file = open('bookList.txt','w') 
