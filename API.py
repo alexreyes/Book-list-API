@@ -20,7 +20,6 @@ def bookList():
     response.headers.add('Access-Control-Allow-Origin', '*')
 
     return response
-    # return jsonify([{"Title": "Supermarket", "Author": "Bobby Hall"}])
 
 def simple_get(url): 
     try: 
