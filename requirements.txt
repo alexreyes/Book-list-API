@@ -3,3 +3,4 @@ contextlib2==0.5.5
 Flask==0.12.2
 gunicorn==19.9.0
 requests==2.18.4
+Flask-SQLAlchemy==2.4.1
