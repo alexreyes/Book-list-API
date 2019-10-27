@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, g
 import os
-import psycopg2
 import sqlite3
 
 app = Flask(__name__)
@@ -21,7 +20,7 @@ def bookList():
     response = jsonify(lines)
     response.headers.add('Access-Control-Allow-Origin', '*')
     
-    file.close()
+    # file.close()
 
     return response
 
