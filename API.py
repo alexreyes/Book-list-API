@@ -1,9 +1,13 @@
 from flask import Flask, jsonify, g
+from flask_sqlalchemy import SQLAlchemy
 import os
-import sqlite3
 
 app = Flask(__name__)
-app.database = "sample.db"
+
+# config
+app.config.from_object(os.environ['APP_SETTINGS'])
+print(os.environ['APP_SETTINGS'])
+db = SQLAlchemy(app)
 
 @app.route("/bookList")
 def bookList(): 
@@ -24,5 +28,5 @@ def bookList():
 
     return response
 
-def connect_db(): 
-    return sqlite3.connect(app.database)
+# def connect_db(): 
+#     return sqlite3.connect(app.database)
