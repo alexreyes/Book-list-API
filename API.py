@@ -10,12 +10,21 @@ print(os.environ['APP_SETTINGS'])
 
 @app.route("/bookList")
 def bookList(): 
-    posts = db.session.query(Book).all()
-    lines = posts
+    # posts = db.session.query(Book).all()
+    # lines = posts
 
+    # response = jsonify(lines)
+    # response.headers.add('Access-Control-Allow-Origin', '*')
+    
+    # # file.close()
+
+    # return response
+    file = open('bookList.txt', 'r')
+    lines = file.read().split("\n")
+    
     response = jsonify(lines)
     response.headers.add('Access-Control-Allow-Origin', '*')
     
-    # file.close()
-
+    file.close()
+    
     return response
