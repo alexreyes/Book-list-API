@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, g
 from flask_sqlalchemy import SQLAlchemy
-from models import Book
-import project
+# from models import Book
+# import project
 import os
 
 # config
