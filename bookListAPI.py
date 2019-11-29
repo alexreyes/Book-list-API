@@ -134,6 +134,7 @@ def get_books():
             link = li.find('a', attrs={'class': 'bookCoverTarget'})
             
             if title['alt'] is not "":
+
                 link = "https://www.goodreads.com" + link['href']
                 new_book = Book(title['alt'], link)
                 result = book_schema.dump(new_book)
