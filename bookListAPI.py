@@ -5,8 +5,13 @@ import os
 from extensions import db
 from models import Book
 
+from requests import get
+from requests.exceptions import RequestException
+from contextlib import closing
+from bs4 import BeautifulSoup
+
 app = Flask(__name__)
-basedir = os.path.abspath(os.path.dirname(__file__))
+basedir = os.path.abspath(os.path.dirname('sqlite:///books.sqlite'))
 app.config.from_pyfile('settings.py')
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
@@ -83,6 +88,62 @@ def book_delete(id):
     db.session.commit()
 
     return book_schema.jsonify(book)
+
+@app.route("/book2019/update", methods=["GET"])
+def update_books():
+    get_books()
+
+    return "success"
+
+
+def simple_get(url): 
+    try: 
+        with closing(get(url, stream=True)) as resp: 
+            if is_good_response(resp): 
+                return resp.content
+            else: 
+                return None
+
+    except RequestException as e: 
+        log_error("Error using requests to {0} : {1}".format(url, str(e)))
+
+def is_good_response(resp): 
+    content_type = resp.headers['Content-Type'].lower()
+    return (resp.status_code == 200 
+            and content_type is not None 
+            and content_type.find('html') > -1)
+
+def log_error(e):
+    """
+    It is always a good idea to log errors. 
+    This function just prints them, but you can
+    make it do anything.
+    """
+    print(e)
+
+def get_books():
+    url = 'https://www.goodreads.com/user_challenges/16171692'
+    response = simple_get(url)
+    
+    soup = BeautifulSoup(response, 'html.parser')
+
+    if response is not None: 
+        
+        for li in soup.find_all('li', attrs={'class': 'bookCoverContainer'}):
+            title = li.find('img', alt=True)
+            link = li.find('a', attrs={'class': 'bookCoverTarget'})
+            
+            if title['alt'] is not "":
+                link = "https://www.goodreads.com" + link['href']
+                new_book = Book(title['alt'], link)
+                result = book_schema.dump(new_book)
+
+                db.session.add(new_book)
+                #file.write(title['alt'] + ' ,link: ' + "https://www.goodreads.com" + link['href'] + '\n')
+    
+    db.session.commit()
+    #file.close()
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
