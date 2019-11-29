@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
+from extensions import db
+from models import Book
 
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -10,22 +12,11 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
 
-class Book(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), unique=True)
-    link = db.Column(db.String(120), unique=True)
-
-    def __init__(self, title, link):
-        self.title = title
-        self.link = link
-
-
 class BookSchema(ma.Schema):
     class Meta:
         # Fields to expose
         fields = ('title', 'link')
-
-
+        
 book_schema = BookSchema()
 books_schema = BookSchema(many=True)
 

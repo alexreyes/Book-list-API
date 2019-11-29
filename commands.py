@@ -1,7 +1,9 @@
 import click
 from flask.cli import with_appcontext
 
-from bookListAPI import Book
+from extensions import db 
+from models import Book
+
 @click.command(name='create_tables')
 @with_appcontext
 def create_tables():
