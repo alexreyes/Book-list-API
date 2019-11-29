@@ -50,8 +50,6 @@ def add_book():
     new_book = Book(title, link)
     result = book_schema.dump(new_book)
 
-            #eturn "Book already in the DB", 400
-
     db.session.add(new_book)
     db.session.commit()
 
