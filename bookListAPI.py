@@ -64,6 +64,7 @@ def add_book():
 @app.route("/book2019", methods=["GET"])
 def get_book():
     all_books = Book.query.all()
+    print("\n\n\n\n\n\n" + all_books + "\n\n\n\n\n")
     result = books_schema.dump(all_books)
     return jsonify(result)
 
@@ -119,7 +120,8 @@ def book_update_list():
     
     db.session.commit()
 
-    return "new book list: " + newBookList + "\n\n\n\n" + " old: " + all_books
+
+    return "book list updated successfully"
 
 if __name__ == '__main__':
     app.run(debug=True)
