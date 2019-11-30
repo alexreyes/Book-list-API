@@ -30,6 +30,9 @@ class BookSchema(ma.Schema):
 book_schema = BookSchema()
 books_schema = BookSchema(many=True)
 
+@app.route('/')
+def index(): 
+    return "This is my book API. By Alex Reyes. For use in www.alexreyes.xyz"
 
 # endpoint to create new book
 @app.route("/book2019", methods=["POST"])
@@ -37,15 +40,16 @@ def add_book():
     title = request.form['title']
     link = request.form['link']
 
-    # all_books = Book.query.all()
-    # result = books_schema.dump(all_books)
-
-    # for book in result: 
-    #     if (book['title'] == title):
-    #         return "Title already exists", 400
-        
-    #     if (book['link'] == link):
-    #         return "Link already exists", 400
+    all_books = Book.query.all()
+    result = books_schema.dump(all_books)
+    
+    if (result): 
+        for book in result: 
+            if (book['title'] == title):
+                return "Title already exists", 400
+            
+            if (book['link'] == link):
+                return "Link already exists", 400
 
     new_book = Book(title, link)
     result = book_schema.dump(new_book)
@@ -99,6 +103,9 @@ def book_delete(id):
 def book_update_list():
     newBookList = get_books()
 
+    all_books = Book.query.all()
+    result = books_schema.dump(all_books)
+
     for book in newBookList: 
         title = ""
         link = ""
@@ -106,7 +113,7 @@ def book_update_list():
         for key, value in book.items(): 
             title = key
             link = value
-
+            
         new_book = Book(title, link)
         db.session.add(new_book)
     
