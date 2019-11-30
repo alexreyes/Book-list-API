@@ -96,7 +96,7 @@ def book_delete(id):
 
 # endpoint to get the latest booklist
 @app.route("/book2019/update", methods=["GET"])
-def book_update_list(id):
+def book_update_list():
     newBookList = get_books()
 
     for book in newBookList: 
