@@ -59,13 +59,6 @@ def get_book():
     return jsonify(result)
 
 
-# endpoint to get book detail by id
-@app.route("/book2019/<id>", methods=["GET"])
-def book_detail(id):
-    book = Book.query.get(id)
-    return book_schema.jsonify(book)
-
-
 # endpoint to update book
 @app.route("/book2019/<id>", methods=["PUT"])
 def book_update(id):
