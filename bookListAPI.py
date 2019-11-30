@@ -4,6 +4,7 @@ from flask_marshmallow import Marshmallow
 import os
 from extensions import db
 from models import Book
+
 from requests import get
 from requests.exceptions import RequestException
 from contextlib import closing
