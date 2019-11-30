@@ -36,15 +36,15 @@ def add_book():
     title = request.form['title']
     link = request.form['link']
 
-    all_books = Book.query.all()
-    result = books_schema.dump(all_books)
+    # all_books = Book.query.all()
+    # result = books_schema.dump(all_books)
 
-    for book in result: 
-        if (book['title'] == title):
-            return "Title already exists", 400
+    # for book in result: 
+    #     if (book['title'] == title):
+    #         return "Title already exists", 400
         
-        if (book['link'] == link):
-            return "Link already exists", 400
+    #     if (book['link'] == link):
+    #         return "Link already exists", 400
 
     new_book = Book(title, link)
     result = book_schema.dump(new_book)
