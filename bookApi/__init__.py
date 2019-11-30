@@ -1,8 +1,8 @@
 from flask import Flask 
 
-from commands import create_tables
-from extensions import db
-from models import Book
+from .commands import create_tables
+from .extensions import db
+from .models import Book
 import bookListAPI
 
 def create_app(config_file='settings.py'):
