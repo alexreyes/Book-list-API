@@ -65,18 +65,6 @@ def add_book():
 def get_book():
     all_books = Book.query.all()
     result = books_schema.dump(all_books)
-    print("incoming")
-
-    print("incoming")
-
-    print("incoming")
-
-    print("incoming")
-    print(result)
-    print("incoming")
-
-    print("incoming")
-    print("incoming")
 
     return jsonify(result)
 
@@ -127,8 +115,9 @@ def book_update_list():
             title = key
             link = value
 
-        new_book = Book(title, link)
-        db.session.add(new_book)
+        if title not in all_books:
+            new_book = Book(title, link)
+            db.session.add(new_book)
     
     db.session.commit()
 
