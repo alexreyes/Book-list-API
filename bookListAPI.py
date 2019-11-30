@@ -125,7 +125,7 @@ def book_update_list():
 
 # endpoint to get the latest booklist
 @app.route("/book2019/data", methods=["GET"])
-def book_update_list():
+def book_data_list():
     newBookList = get_books()
 
     all_books = Book.query.all()
