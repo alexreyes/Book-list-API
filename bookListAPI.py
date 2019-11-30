@@ -131,15 +131,8 @@ def book_data_list():
     all_books = Book.query.all()
     result = books_schema.dump(all_books)
     
-    print(newBookList)
-    print()
-
-    print()
-    print()
-    print()
-    print()
-
-    print(result)
+    for book in result: 
+        print(book)
 
 
     return "book list updated successfully"
