@@ -1,1 +1,1 @@
-web: gunicorn bookListAPI:app
+web: gunicorn wsgi:app
