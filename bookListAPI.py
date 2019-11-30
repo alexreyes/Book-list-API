@@ -115,9 +115,8 @@ def book_update_list():
             title = key
             link = value
 
-        if title not in all_books:
-            new_book = Book(title, link)
-            db.session.add(new_book)
+        new_book = Book(title, link)
+        db.session.add(new_book)
     
     db.session.commit()
 
