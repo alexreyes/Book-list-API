@@ -123,5 +123,26 @@ def book_update_list():
 
     return "book list updated successfully"
 
+# endpoint to get the latest booklist
+@app.route("/book2019/data", methods=["GET"])
+def book_update_list():
+    newBookList = get_books()
+
+    all_books = Book.query.all()
+    result = books_schema.dump(all_books)
+    
+    print(newBookList)
+    print()
+
+    print()
+    print()
+    print()
+    print()
+
+    print(result)
+
+
+    return "book list updated successfully"
+
 if __name__ == '__main__':
     app.run(debug=True)
