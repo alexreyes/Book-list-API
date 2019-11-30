@@ -64,7 +64,19 @@ def add_book():
 @app.route("/book2019", methods=["GET"])
 def get_book():
     all_books = Book.query.all()
-    print("\n\n\n\n\n\n" + all_books + "\n\n\n\n\n")
+    print("incoming")
+
+    print("incoming")
+
+    print("incoming")
+
+    print("incoming")
+    print(all_books)
+    print("incoming")
+
+    print("incoming")
+    print("incoming")
+
     result = books_schema.dump(all_books)
     return jsonify(result)
 
