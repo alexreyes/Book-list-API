@@ -52,5 +52,4 @@ def get_books():
                 returnArr.append(newDict)
     
     return returnArr
-# print(len(theList))
-# print(*theList, sep = "\n")
+    

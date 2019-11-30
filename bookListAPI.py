@@ -132,7 +132,7 @@ def book_data_list():
     result = books_schema.dump(all_books)
     
     for book in result: 
-        print(book)
+        # print(book)
 
 
     return "book list updated successfully"
