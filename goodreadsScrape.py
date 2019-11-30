@@ -32,7 +32,7 @@ def get_books():
     url = 'https://www.goodreads.com/user_challenges/16171692'
     response = simple_get(url)
 
-    file = open('bookList.txt','w') 
+    returnArr = []
     
     soup = BeautifulSoup(response, 'html.parser')
 
@@ -43,10 +43,14 @@ def get_books():
             link = li.find('a', attrs={'class': 'bookCoverTarget'})
             
             if title['alt'] is not "":
-                file.write(title['alt'] + ' ,link: ' + "https://www.goodreads.com" + link['href'] + '\n')
+                newDict = {}
+                title = title['alt']
+                link = "https://www.goodreads.com" + link['href']
+
+                newDict[title] = link
+
+                returnArr.append(newDict)
     
-    file.close()
-    
-get_books()
+    return returnArr
 # print(len(theList))
 # print(*theList, sep = "\n")

@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from goodreadsScrape import get_books
 import os
 
 app = Flask(__name__)
@@ -92,6 +93,26 @@ def book_delete(id):
     db.session.commit()
 
     return book_schema.jsonify(book)
+
+# endpoint to get the latest booklist
+@app.route("/book2019/update", methods=["GET"])
+def book_update_list(id):
+    newBookList = get_books()
+
+    for book in newBookList: 
+        title = ""
+        link = ""
+
+        for key, value in book.items(): 
+            title = key
+            link = value
+
+        new_book = Book(title, link)
+        db.session.add(new_book)
+    
+    db.session.commit()
+
+    return "Successfully updated everything"
 
 if __name__ == '__main__':
     app.run(debug=True)
