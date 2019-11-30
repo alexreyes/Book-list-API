@@ -113,13 +113,13 @@ def book_update_list():
         for key, value in book.items(): 
             title = key
             link = value
-            
+
         new_book = Book(title, link)
         db.session.add(new_book)
     
     db.session.commit()
 
-    return "Successfully updated everything"
+    return "new book list: " + newBookList + "\n\n\n\n" + " old: " + all_books
 
 if __name__ == '__main__':
     app.run(debug=True)
